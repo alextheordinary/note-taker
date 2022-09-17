@@ -23,7 +23,7 @@ notes.post('/', (req, res) => {
         const newNote = {
             title,
             text,
-            note_id: uuidv4()
+            id: uuidv4()
         };
 
         fs.readFile(dbFile, 'utf8', (err, data) => {
