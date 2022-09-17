@@ -37,7 +37,7 @@ notes.post('/', (req, res) => {
                 );
             }
         });
-        return newNote;
+        return res.json(newNote);
     }
 });
 
