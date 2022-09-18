@@ -41,4 +41,24 @@ notes.post('/', (req, res) => {
     }
 });
 
+// Receive query parameter containing the id of a note to delete. Read all notes from the file, remove the note with the matching id, and rewrite to db.json
+
+notes.delete('/:id', (req, res) => {
+    idParam = req.params.id;
+    fs.readFile(dbFile, 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+        } else {
+            const dbData = JSON.parse(data);
+            const newData = [];
+            for (const note of dbData) {
+                if (idParam !== note.id) {
+                    newData.push(note);
+                }
+            }
+            return res.json(JSON.parse(newData));
+        }
+    })
+});
+
 module.exports = notes;
