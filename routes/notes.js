@@ -56,7 +56,10 @@ notes.delete('/:id', (req, res) => {
                     newData.push(note);
                 }
             }
-            return res.json(JSON.parse(newData));
+            fs.writeFile(dbFile, JSON.stringify(newData, null, 4), (err) =>
+            err ? console.error(err) : console.info(`\n Data written to ${dbFile}`)
+        );
+            return res.json(newData);
         }
     })
 });
